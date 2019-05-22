@@ -20,9 +20,16 @@ export class AppComponent {
   }
 
   getAll() {
+    let value: any;
+    value = localStorage.getItem('airlines');
+    if(value) {
+      this.airlines = JSON.parse(value);
+      return;
+    }
   	this._airline.getAll().subscribe(
   		(res) => {
   			this.airlines = res;
+        localStorage.setItem('airlines', JSON.stringify(res));
   		},
   		(err) => {
   			console.log(err);
@@ -34,9 +41,17 @@ export class AppComponent {
   	data.card_on = !data.card_on;
   	if(!data.card_on) return;
   	if(data.details) return;
+    let value: any;
+    value = localStorage.getItem(data.iata_code);
+    if(value) {
+      value = JSON.parse(value);
+      data.details = value.details;      
+      return;
+    }
   	this._airline.get({ iata_code: data.iata_code }).subscribe(
   		(res) => {
   			data.details = res[0];
+        localStorage.setItem(data.iata_code, JSON.stringify(data));
   			if(data.details && data.details.website) {
   				this.getUrlPreview(data);
   			}
@@ -51,6 +66,7 @@ export class AppComponent {
   	this._airline.getUrlPreview(data.details.website).subscribe(
   		(res) => {
   			data.details.preview = res;
+        localStorage.setItem(data.iata_code, JSON.stringify(data));
   		},
   		(err) => {
   			console.log(err);
