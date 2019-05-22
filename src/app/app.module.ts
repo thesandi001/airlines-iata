@@ -6,6 +6,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { ConfigService } from './services/config.service';
 import { HttpService } from './services/http.service';
 import { CommonService } from './services/common.service';
 import { AirlineService } from './services/airline.service';
@@ -24,6 +25,7 @@ import {MatCardModule} from '@angular/material/card';
     MatCardModule
   ],
   providers: [
+    ConfigService,
   	HttpService,
   	CommonService,
   	AirlineService

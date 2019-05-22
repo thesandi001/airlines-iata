@@ -1,20 +1,18 @@
 <router-outlet></router-outlet>
-<!-- <pre>{{ airlines | json }}</pre> -->
 <div class="container">
   <div class="row main-body">
-    
-
-
     <div class="col-sm" *ngFor="let airline of airlines">
-      <mat-card class="card">
+      <mat-card class="card" (mouseenter)="get(airline)">
         <mat-card-header>
           <mat-card-title>{{ airline?.iata_code }}</mat-card-title>
-          <mat-card-subtitle>{{ airline?.name }}</mat-card-subtitle>
+          <mat-card-subtitle>{{ airline?.name }}</mat-card-subtitle>          
         </mat-card-header>
+        <mat-card-content>
+          <p>{{ airline?.details?.website }}</p>
+          <p>{{ airline?.details?.low_cost_carrier }}</p>
+          <p>{{ airline?.details?.preview | json }}</p>
+        </mat-card-content>
       </mat-card>
     </div>
-
-
-    
   </div>
 </div>

@@ -1,9 +1,23 @@
+@mixin transition($t) {
+	transition: $t;
+	-o-transition: $t;
+	-moz-transition: $t;
+	-webkit-transition: $t;
+}
+
 .main-body {
 	margin-top: 50px;
 }
 
 .card {
-	width: 200px;
+	width: 300px;
 	height: 100px;
 	margin-bottom: 20px;
+	cursor: pointer;
+	@include transition(all 1s ease);
+}
+
+.card:hover {
+	position: relative;
+	height: 250px;	
 }
