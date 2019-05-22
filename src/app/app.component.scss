@@ -4,9 +4,15 @@
 	-moz-transition: $t;
 	-webkit-transition: $t;
 }
-
+.header {
+	text-align: center;
+	font-size: 48px;
+	padding: 30px;
+	font-weight: 100;
+	color: mediumaquamarine;
+}
 .main-body {
-	margin-top: 50px;
+	margin-top: 30px;
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
