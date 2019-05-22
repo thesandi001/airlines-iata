@@ -7,17 +7,33 @@
 
 .main-body {
 	margin-top: 50px;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+$card-height: 100px;
+$card-width: 350px;
 
 .card {
-	width: 300px;
-	height: 100px;
+	width: $card-width;
+	height: $card-height;
 	margin-bottom: 20px;
 	cursor: pointer;
-	@include transition(all 1s ease);
+	overflow: hidden;
+	@include transition(all 1s ease);	
 }
 
-.card:hover {
-	position: relative;
-	height: 250px;	
+.card-on { height: $card-height * 5; }
+
+a { text-decoration: none; }
+.bold { font-weight: 600; }
+.type {
+	position: absolute;
+    right: 10px;    
+    color: #fff;
+    font-size: 10px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    &.low { background: mediumaquamarine; }
+    &.full { background: black; }
 }
+.mt-10 { margin-top: 10px; }

@@ -2,16 +2,28 @@
 <div class="container">
   <div class="row main-body">
     <div class="col-sm" *ngFor="let airline of airlines">
-      <mat-card class="card" (mouseenter)="get(airline)">
+      <mat-card class="card" [ngClass]="{'card-on': airline.card_on}" (click)="get(airline)">
+        <div class="type low" *ngIf="airline?.details?.low_cost_carrier == true">Low Cost</div>
+        <div class="type full" *ngIf="airline?.details?.low_cost_carrier == false">Full Service</div>
         <mat-card-header>
           <mat-card-title>{{ airline?.iata_code }}</mat-card-title>
-          <mat-card-subtitle>{{ airline?.name }}</mat-card-subtitle>          
+          <mat-card-subtitle>{{ airline?.name }}</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>
-          <p>{{ airline?.details?.website }}</p>
-          <p>{{ airline?.details?.low_cost_carrier }}</p>
-          <p>{{ airline?.details?.preview | json }}</p>
+        <mat-card-content class="mt-10" *ngIf="airline?.details?.website && airline.card_on">
+          <a href="{{ airline?.details?.preview?.url }}" target="_blank">
+            <img mat-card-image src="{{ airline?.details?.preview?.image }}">
+          </a>
+          <mat-card-subtitle class="bold">{{ airline?.details?.preview?.title }}</mat-card-subtitle>
+          <mat-card-subtitle>{{ airline?.details?.preview?.description }}</mat-card-subtitle>
+          <mat-card-subtitle>
+            <a href="{{ airline?.details?.preview?.url }}" target="_blank">{{ airline?.details?.preview?.url }}</a>
+          </mat-card-subtitle>
         </mat-card-content>
+
+        <mat-card-content class="mt-10" *ngIf="!airline?.details?.website && airline.card_on">
+          <mat-card-subtitle>Website not found</mat-card-subtitle>          
+        </mat-card-content>
+
       </mat-card>
     </div>
   </div>

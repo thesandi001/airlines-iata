@@ -31,6 +31,9 @@ export class AppComponent {
   }
 
   get(data: any = null) {
+  	data.card_on = !data.card_on;
+  	if(!data.card_on) return;
+  	if(data.details) return;
   	this._airline.get({ iata_code: data.iata_code }).subscribe(
   		(res) => {
   			data.details = res[0];
@@ -52,7 +55,7 @@ export class AppComponent {
   		(err) => {
   			console.log(err);
   		},
-  	);    
+  	);
   }
 
 }
