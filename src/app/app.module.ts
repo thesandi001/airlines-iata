@@ -15,12 +15,10 @@ import { AirlineService } from './services/airline.service';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-import { AirlineNamePipe } from './pipes/airline-name.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AirlineNamePipe
+    AppComponent
   ],
   imports: [
     BrowserModule,
