@@ -1,9 +1,17 @@
 <router-outlet></router-outlet>
 <div class="container mt-10">
   <div class="header">Airlines - IATA</div>
+  <div class="text-center">
+    <mat-form-field class="example-full-width text-center">
+      <input matInput type="text" placeholder="Search Airline" [(ngModel)]="searchText" (keyup)="search()" autofocus>
+      <button mat-button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="searchText='';search();">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>  
   <div class="row main-body">
-    <div class="col-sm" *ngFor="let airline of airlines">
-      <mat-card class="card" [ngClass]="{'card-on': airline.card_on}" (click)="get(airline)">
+    <div class="col-sm" *ngFor="let airline of finalList">
+      <mat-card class="card" [ngClass]="{'card-on': airline?.card_on, 'card-auto': airline?.preview}" (click)="get(airline)">
         <div class="type low" *ngIf="airline?.details?.low_cost_carrier == true">Low Cost</div>
         <div class="type full" *ngIf="airline?.details?.low_cost_carrier == false">Full Service</div>
         <mat-card-header>
@@ -20,11 +28,9 @@
             <a href="{{ airline?.details?.preview?.url }}" target="_blank">{{ airline?.details?.preview?.url }}</a>
           </mat-card-subtitle>
         </mat-card-content>
-
-        <mat-card-content class="mt-10" *ngIf="!airline?.details?.website && airline.card_on">
-          <mat-card-subtitle>Website not found</mat-card-subtitle>          
+        <mat-card-content class="mt-10" *ngIf="airline?.details && !airline?.details?.website && airline.card_on">
+          <mat-card-subtitle>Website not found</mat-card-subtitle>
         </mat-card-content>
-
       </mat-card>
     </div>
   </div>

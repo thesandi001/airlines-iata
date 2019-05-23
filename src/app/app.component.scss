@@ -30,6 +30,8 @@ $card-width: 350px;
 
 .card-on { height: $card-height * 5; }
 
+.card-auto { height: auto !important; }
+
 a { text-decoration: none; }
 .bold { font-weight: 600; }
 .type {

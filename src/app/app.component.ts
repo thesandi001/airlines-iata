@@ -10,6 +10,9 @@ import { AirlineService } from './services/airline.service';
 export class AppComponent {
 
   airlines: any = [];
+  filteredAirlines: any = [];
+  finalList: any = [];
+  searchText: string;
   
   constructor(
     private _airline: AirlineService
@@ -24,11 +27,13 @@ export class AppComponent {
     value = localStorage.getItem('airlines');
     if(value) {
       this.airlines = JSON.parse(value);
+      this.finalList = this.airlines;
       return;
     }
   	this._airline.getAll().subscribe(
   		(res) => {
   			this.airlines = res;
+        this.finalList = this.airlines;
         localStorage.setItem('airlines', JSON.stringify(res));
   		},
   		(err) => {
@@ -66,12 +71,24 @@ export class AppComponent {
   	this._airline.getUrlPreview(data.details.website).subscribe(
   		(res) => {
   			data.details.preview = res;
+        data.preview = true;
         localStorage.setItem(data.iata_code, JSON.stringify(data));
   		},
   		(err) => {
   			console.log(err);
   		},
   	);
+  }
+
+  search() {
+    this.filteredAirlines = this.airlines.filter(airline => {
+      if(airline.name.toLowerCase().includes(this.searchText.toLowerCase())) return true;
+    });
+    if(this.searchText.length) this.finalList = this.filteredAirlines;
+    else this.finalList = this.airlines;
+    console.log(this.airlines);
+    console.log(this.filteredAirlines);
+    console.log(this.finalList);
   }
 
 }
